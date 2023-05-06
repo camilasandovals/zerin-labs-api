@@ -10,6 +10,6 @@ router.get("/users", getUsers);
 router.get("/medications", getMedications);
 router.post("/signup", addUser)
 router.post("/medications", addMedication);
-
+router.delete("/medications/:docId", deleteMedication)
 
 export default router;

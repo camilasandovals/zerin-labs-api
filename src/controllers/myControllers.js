@@ -26,4 +26,8 @@ export async function addMedication(req,res){
   res.send({ message: "user added"});
 }
 
+export async function deleteMedication(req, res){
+  await Medication.deleteOne(req.params.docId);
+  res.status(202).send({message : "medication deleted"})
+}
 
