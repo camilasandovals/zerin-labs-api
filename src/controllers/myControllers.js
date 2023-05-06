@@ -7,5 +7,11 @@ export async function getUsers(req, res) {
   res.status(200).send(allUsers);
 }
 
+export async function addUser(req,res){
+    const {username, password} = req.body;
+    const newUser = new User({username, password});
+    await newUser.save();
+    res.send({ message: "user added"});
+}
 
 

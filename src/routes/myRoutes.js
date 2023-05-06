@@ -8,5 +8,7 @@ router.get("/", (req, res) => {
 
 router.get("/users", getUsers);
 
+router.post("/signup", addUser)
+
 
 export default router;
