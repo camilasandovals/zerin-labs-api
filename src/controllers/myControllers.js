@@ -14,4 +14,10 @@ export async function addUser(req,res){
     res.send({ message: "user added"});
 }
 
+export async function getMedications(req, res) {
+  const allMedication = await Medication.find();
+  res.status(200).send(allMedication);
+}
+
+
 

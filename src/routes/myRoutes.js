@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/users", getUsers);
-
+router.get("/medications", getMedications);
 router.post("/signup", addUser)
 
 
