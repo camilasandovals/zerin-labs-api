@@ -14,7 +14,7 @@ const medicationDummyData = [
         name: "ibuprofen",
         dosage: 200,
         quantity: 1,
-        amount: "mg",
-        frequency: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    }
+        unit: "mg",
+        frequency: "twice a day"
+    },
 ]
