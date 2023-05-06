@@ -19,5 +19,11 @@ export async function getMedications(req, res) {
   res.status(200).send(allMedication);
 }
 
+export async function addMedication(req,res){
+  const {name, dosage, frequency, unit, quantity } = req.body;
+  const newMedication = new User({name, dosage, frequency, unit, quantity});
+  await newMedication.save();
+  res.send({ message: "user added"});
+}
 
 
