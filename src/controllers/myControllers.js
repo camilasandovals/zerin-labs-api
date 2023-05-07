@@ -21,13 +21,23 @@ export async function getMedications(req, res) {
 
 export async function addMedication(req,res){
   const {name, dosage, frequency, unit, quantity } = req.body;
-  const newMedication = new User({name, dosage, frequency, unit, quantity});
+  const newMedication = new Medication({name, dosage, frequency, unit, quantity});
   await newMedication.save();
   res.send({ message: "user added"});
 }
 
 export async function deleteMedication(req, res){
-  await Medication.deleteOne(req.params.docId);
+  const docId = { "_id": new ObjectId(req.params.docId)
+    }
+  await Medication.deleteOne(docId);
   res.status(202).send({message : "medication deleted"})
 }
 
+export async function updateMedication(req, res){
+  const docId = { "_id": new ObjectId(req.params.docId)
+    }
+  const updateMed = {$set:req.body};
+  const returnOption = { returnNewDocument: true};
+  await Medication.findOneAndUpdate(docId, updateMed, returnOption);
+  res.status(200).send({message: "updated"})
+}

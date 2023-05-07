@@ -1,5 +1,5 @@
 import express from "express";
-import { getUsers, getMedications, addMedication, addUser, deleteMedication } from "../controllers/mycontrollers.js";
+import { getUsers, getMedications, addMedication, addUser, deleteMedication, updateMedication } from "../controllers/mycontrollers.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -7,9 +7,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/users", getUsers);
-router.get("/medications", getMedications);
-router.post("/signup", addUser)
+router.post("/users", addUser)
+
+router.get("/medications", getMedications)
 router.post("/medications", addMedication);
+router.patch("/medications/:docId", updateMedication);
 router.delete("/medications/:docId", deleteMedication)
 
 export default router;
