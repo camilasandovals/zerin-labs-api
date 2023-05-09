@@ -2,9 +2,9 @@ import { Schema } from "mongoose";
 import { model } from "mongoose";
 
 const MedicationSchema = new Schema({
-    name: {
+    nameMed: {
         type: String,
-        required: true,
+        
     },
     dosage: {
         type: Number,

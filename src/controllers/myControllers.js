@@ -20,10 +20,10 @@ export async function getMedications(req, res) {
 }
 
 export async function addMedication(req,res){
-  const {name, dosage, frequency, unit, quantity } = req.body;
-  const newMedication = new Medication({name, dosage, frequency, unit, quantity});
+  const {nameMed, dosage, frequency, unit, quantity } = req.body;
+  const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
   await newMedication.save();
-  res.send({ message: "user added"});
+  res.send({ message: "medication added"});
 }
 
 export async function deleteMedication(req, res){
