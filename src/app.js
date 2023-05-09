@@ -24,5 +24,5 @@ mongoose.connection.on("connected", () => {
 
 const port = 3001;
 app.listen(port, () => {
-    console.log(`Server is running on port: http://localhost:${port}`);
+    console.log(`Server is running on port: http://localhost:${port}/api/`);
 });

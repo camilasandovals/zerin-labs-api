@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import User from "../models/user.js";
-import Medication from "../models/UserMedication.js";
+import Medication from "../models/userMedication.js";
 
 export async function getUsers(req, res) {
   const allUsers = await User.find();
