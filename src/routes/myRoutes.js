@@ -1,5 +1,5 @@
 import express from "express";
-import { getUsers, getMedications, addMedication, addUser, deleteMedication, updateMedication } from "../controllers/mycontrollers.js";
+import { getUsers, getMedications, addMedication, addUser, deleteMedication, updateMedication } from "../controllers/myControllers.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
