@@ -18,7 +18,7 @@ export async function addUserInfo(req,res){
   const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
   const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
   await infoUser.save();
-  res.send({ message: "user information added"});
+  res.send({ message: "user information added" });
 }
 
 export async function getMedications(req, res) {
