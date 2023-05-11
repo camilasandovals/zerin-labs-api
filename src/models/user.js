@@ -12,6 +12,27 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    firstname: {
+        type: String,
+    },
+    age: {
+        type: Number,
+    },
+    gender: {
+        type: Boolean,
+    },
+    cholesterol: {
+        type: Number,
+    },
+    height: {
+        type: Number,
+    },
+    weight: {
+        type: Number,
+    },
+    img: {
+
+    },
 })
 
 const User = new model("User", userSchema);
