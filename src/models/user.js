@@ -31,8 +31,11 @@ const userSchema = new Schema({
         type: Number,
     },
     img: {
-
+        type: String,
     },
+    points: {
+        type: Number,
+    }
 })
 
 const User = new model("User", userSchema);

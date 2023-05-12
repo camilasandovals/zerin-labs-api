@@ -22,13 +22,13 @@ const MedicationSchema = new Schema({
         required: true,
     },
     quantity: {
-        type: Number,
+        type: String,
         required: true
     },
     notes: {
         type: String
     },
-    img: {
+    medImg: {
         type: String
     },
 })

@@ -28,8 +28,8 @@ export async function getMedications(req, res) {
 
 export async function addMedication(req,res){
   try {
-    const {nameMed, dosage, frequency, unit, quantity } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
+    const {nameMed, dosage, frequency, unit, quantity, notes, medImg } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg});
     await newMedication.save();
     await getMedications(req, res);
   }
@@ -49,10 +49,15 @@ export async function deleteMedication(req, res){
 }
 
 export async function updateMedication(req, res){
+  try {
   const docId = { "_id": new ObjectId(req.params.docId)
     }
   const updateMed = {$set:req.body};
   const returnOption = { returnNewDocument: true};
   await Medication.findOneAndUpdate(docId, updateMed, returnOption);
-  res.status(200).send({message: "updated"})
+  await getMedications(req, res);
+  }
+  catch {
+    res.status(200).send({message: "updated"})
+  }
 }
