@@ -27,17 +27,25 @@ export async function getMedications(req, res) {
 }
 
 export async function addMedication(req,res){
-  const {nameMed, dosage, frequency, unit, quantity } = req.body;
-  const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
-  await newMedication.save();
-  res.send({ message: "medication added"});
+  try {
+    const {nameMed, dosage, frequency, unit, quantity } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
+    await newMedication.save();
+    await getMedications(req, res);
+  }
+  catch (error) {
+  res.status(500).send({ message: "An error ocurred"});
+  }
 }
 
 export async function deleteMedication(req, res){
-  const docId = { "_id": new ObjectId(req.params.docId)
-    }
-  await Medication.deleteOne(docId);
-  res.status(202).send({message : "medication deleted"})
+  try{
+    const docId = { "_id": new ObjectId(req.params.docId)}
+    await Medication.deleteOne(docId);
+    await getMedications(req, res);
+  } catch(error) {
+    res.status(500).send({message : "An error ocurred"})
+  }
 }
 
 export async function updateMedication(req, res){
