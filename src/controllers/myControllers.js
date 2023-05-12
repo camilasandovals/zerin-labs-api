@@ -26,10 +26,21 @@ export async function getMedications(req, res) {
   res.status(200).send(allMedication);
 }
 
+export async function getMedInfo(req,res){
+  try {
+    const docId = { "_id": new ObjectId(req.params.docId)}
+    const medication = await Medication.findOne(docId);
+    res.send(medication)
+  }
+  catch (error) {
+  res.status(500).send({ message: "An error ocurred"});
+  }
+}
+
 export async function addMedication(req,res){
   try {
-    const {nameMed, dosage, frequency, unit, quantity, notes, medImg } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg});
+    const {nameMed, dosage, frequency, unit, quantity } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
     await newMedication.save();
     await getMedications(req, res);
   }
@@ -37,6 +48,7 @@ export async function addMedication(req,res){
   res.status(500).send({ message: "An error ocurred"});
   }
 }
+
 
 export async function deleteMedication(req, res){
   try{
