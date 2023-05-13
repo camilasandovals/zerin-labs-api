@@ -2,14 +2,16 @@ import { ObjectId } from "mongodb";
 import User from "../models/user.js";
 import Medication from "../models/userMedication.js";
 
+// --------------------Users 
+
 export async function getUsers(req, res) {
   const allUsers = await User.find();
   res.status(200).send(allUsers);
 }
 
 export async function addUser(req,res){
-    const {username, password} = req.body;
-    const newUser = new User({username, password});
+    const {email, password} = req.body;
+    const newUser = new User({email, password});
     await newUser.save();
     res.send({ message: "user added"});
 }
@@ -20,6 +22,9 @@ export async function addUserInfo(req,res){
   await infoUser.save();
   res.send({ message: "user information added" });
 }
+
+
+// ---------------   Medications
 
 export async function getMedications(req, res) {
   const allMedication = await Medication.find();
