@@ -30,7 +30,7 @@ const userSchema = new Schema({
     weight: {
         type: Number,
     },
-    image: {
+    img: {
         type: String,
     },
     points: {

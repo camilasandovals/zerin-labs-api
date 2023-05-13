@@ -21,6 +21,6 @@ const medicationDummyData = [
         unit: "mg",
         frequency: "twice a day",
         notes: "do not drink alcohol",
-        image: "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
+        medImg: "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
     },
 ]
