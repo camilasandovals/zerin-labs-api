@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import User from "../models/user.js";
 import Medication from "../models/userMedication.js";
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv";
+// import jwt from "jsonwebtoken"
+// import dotenv from "dotenv";
 
-const secretKey  = process.env.secretKey;
+// const secretKey  = process.env.secretKey;
 // --------------------Users 
 export async function getUsers(req, res) {
   const allUsers = await User.find();
