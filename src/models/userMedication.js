@@ -31,6 +31,9 @@ const MedicationSchema = new Schema({
     medImg: {
         type: String
     },
+    show: {
+        type: Boolean
+    }
 })
 
 const Medication = new model("Medication", MedicationSchema);
