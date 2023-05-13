@@ -15,8 +15,8 @@ export async function addUser(req,res){
 }
 
 export async function addUserInfo(req,res){
-  const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
-  const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
+  const {firstname, age, gender, cholesterol, height, weight, image} = req.body;
+  const infoUser = new User({firstname, age, gender, cholesterol, height, weight, image});
   await infoUser.save();
   res.send({ message: "user information added" });
 }
@@ -39,8 +39,8 @@ export async function getMedInfo(req,res){
 
 export async function addMedication(req,res){
   try {
-    const {nameMed, dosage, frequency, unit, quantity } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity});
+    const {nameMed, dosage, frequency, unit, quantity, notes, image } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, image});
     await newMedication.save();
     await getMedications(req, res);
   }

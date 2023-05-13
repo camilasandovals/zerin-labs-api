@@ -28,7 +28,7 @@ const MedicationSchema = new Schema({
     notes: {
         type: String
     },
-    medImg: {
+    image: {
         type: String
     },
 })
