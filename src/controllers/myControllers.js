@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import User from "../models/user.js";
 import Medication from "../models/userMedication.js";
-// import jwt from "jsonwebtoken"
-// import dotenv from "dotenv";
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
 
-// const secretKey  = process.env.secretKey;
+const secretKey  = process.env.secretKey;
 
 // --------------------Users 
 export async function getUsers(req, res) {
@@ -14,6 +14,14 @@ export async function getUsers(req, res) {
 export async function addUser(req, res) {
   try {
     const { email, password, uid } = req.body;
+    if (!email || password.length < 8) {
+      res.status(400).send({
+        message:
+          "Email and password are required. Password must be 8 characters or long",
+      });
+      return;
+    }
+    //check if email is already in use
 
     const newUser = new User({
       email,
@@ -39,6 +47,11 @@ export async function addUserInfo(req,res){
 }
 // ---------------   Medications
 export async function getMedications(req, res) {
+  const token = req.header.authorization
+    if(!token) {
+        res.status(401).send({message: "Unauthorized. A valid token is required."})
+        return
+    }
   const allMedication = await Medication.find();
   res.status(200).send(allMedication);
 }
@@ -53,6 +66,11 @@ export async function getMedInfo(req,res){
   }
 }
 export async function addMedication(req,res){
+  const token = req.header.authorization
+    if(!token) {
+        res.status(401).send({message: "Unauthorized. A valid token is required."})
+        return
+    }
   try {
     const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show } = req.body;
     const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show});
@@ -63,8 +81,6 @@ export async function addMedication(req,res){
   res.status(500).send({ message: "An error ocurred"});
   }
 }
-
-
 export async function deleteMedication(req, res){
   try{
     const docId = { "_id": new ObjectId(req.params.docId)}
@@ -74,7 +90,6 @@ export async function deleteMedication(req, res){
     res.status(500).send({message : "An error ocurred"})
   }
 }
-
 export async function updateMedication(req, res){
   try {
   const docId = { "_id": new ObjectId(req.params.docId)
