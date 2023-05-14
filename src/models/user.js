@@ -15,8 +15,9 @@ const userSchema = new Schema({
         type: String || ObjectId
     },
     points: {
-        type: String
+         type: String, default: 0 
     },
+    createdAt: { type: Date, default: Date.now },
     // firstname: {
     //     type: String,
     // },

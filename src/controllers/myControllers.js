@@ -23,10 +23,13 @@ export async function addUser(req, res) {
       });
       return;
     }
-    // const check = await db.collection("users").where("email", "==", email.toLowerCase()).get()
-    // if(check.exists){
-    //     res.status(401).send({message: "Email already exists. Please try logging in instead"})
-    // }
+    const check = User.findOne({ email: {email} })
+    
+    if(check){
+      res.status(401).send({message: "Email already exists. Please try logging in instead"})
+      return;
+      }
+    
     if(password){ const hashedPassword = hashSync(password, salt)}
     
     const newUser = new User({
@@ -53,11 +56,11 @@ export async function addUserInfo(req,res){
 }
 // ---------------   Medications
 export async function getMedications(req, res) {
-  const token = req.header.authorization
-    if(!token) {
-        res.status(401).send({message: "Unauthorized. A valid token is required."})
-        return
-    }
+  // const token = req.header.authorization
+  //   if(!token) {
+  //       res.status(401).send({message: "Unauthorized. A valid token is required."})
+  //       return
+  //   }
   const allMedication = await Medication.find();
   res.status(200).send(allMedication);
 }
@@ -72,11 +75,11 @@ export async function getMedInfo(req,res){
   }
 }
 export async function addMedication(req,res){
-  const token = req.header.authorization
-    if(!token) {
-        res.status(401).send({message: "Unauthorized. A valid token is required."})
-        return
-    }
+  // const token = req.header.authorization
+  //   if(!token) {
+  //       res.status(401).send({message: "Unauthorized. A valid token is required."})
+  //       return
+  //   }
   try {
     const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show } = req.body;
     const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show});

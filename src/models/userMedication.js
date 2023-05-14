@@ -33,7 +33,8 @@ const MedicationSchema = new Schema({
     },
     show: {
         type: Boolean
-    }
+    },
+    createdAt: { type: Date, default: Date.now },
 })
 
 const Medication = new model("Medication", MedicationSchema);
