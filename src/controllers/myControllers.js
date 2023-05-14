@@ -13,12 +13,12 @@ export async function getUsers(req, res) {
 }
 export async function addUser(req, res) {
   try {
-    const { email, password, userId } = req.body;
+    const { email, password, uid } = req.body;
 
     const newUser = new User({
       email,
       password,
-      _id: userId || new ObjectId(),
+      _id: uid || new ObjectId(),
     });
 
     const addUser = await newUser.save();
