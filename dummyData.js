@@ -1,11 +1,13 @@
 const userDummyData = [
     {
         email: "user1",
-        password: "12345678"
+        hashedPassword: "12345678",
+        uid,
     },
     {
         email: "user2",
-        password: "12345678"
+        hashedPassword: "12345678",
+        uid
     },
 ]
 const userinfoDummyData = [
