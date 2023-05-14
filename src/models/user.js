@@ -3,13 +3,18 @@ import { model } from "mongoose";
 
 const userSchema = new Schema({
     email: {
-
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
+    },
+    _id:{
+        type: String
+    },
+    points: {
+        type: String
     },
     // firstname: {
     //     type: String,
@@ -32,9 +37,6 @@ const userSchema = new Schema({
     // img: {
     //     type: String,
     // },
-    // points: {
-    //     type: Number,
-    // }
 })
 
 const User = new model("User", userSchema);

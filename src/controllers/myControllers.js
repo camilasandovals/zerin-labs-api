@@ -5,25 +5,32 @@ import Medication from "../models/userMedication.js";
 // import dotenv from "dotenv";
 
 // const secretKey  = process.env.secretKey;
+
 // --------------------Users 
 export async function getUsers(req, res) {
   const allUsers = await User.find();
   res.status(200).send(allUsers);
 }
-export async function addUser(req,res){
+export async function addUser(req, res) {
   try {
-    const {email, password} = req.body;
-    const newUser = new User({email, password});
+    const { email, password, userId } = req.body;
+
+    const newUser = new User({
+      email,
+      password,
+      _id: userId, 
+    });
+
     const addUser = await newUser.save();
-    res.status(201).send(addUser)
-  }
-  catch (error) {
+
+    res.status(201).send(addUser);
+  } catch (error) {
     res.status(500).json({
       error: [error.message],
-      message: "an error"
-      })
-    }
+      message: "an error",
+    });
   }
+}
 export async function addUserInfo(req,res){
   const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
   const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
