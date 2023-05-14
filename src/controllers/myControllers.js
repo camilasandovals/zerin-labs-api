@@ -54,7 +54,7 @@ export async function addUserInfo(req,res){
 }
 // ---------------   Medications
 export async function getMedications(req, res) {
-  const token = req.header.authorization
+  // const token = req.header.authorization
     // if(!token) {
     //     res.status(401).send({message: "Unauthorized. A valid token is required."})
     //     return
@@ -73,7 +73,7 @@ export async function getMedInfo(req,res){
   }
 }
 export async function addMedication(req,res){
-  const token = req.header.authorization
+  // const token = req.header.authorization
     // if(!token) {
     //     res.status(401).send({message: "Unauthorized. A valid token is required."})
     //     return
