@@ -2,10 +2,10 @@ import { hashSync } from "bcrypt"
 import { ObjectId } from "mongodb";
 import User from "../models/user.js";
 import Medication from "../models/userMedication.js";
-import jwt from "jsonwebtoken"
+// import jwt from "jsonwebtoken"
 import dotenv from "dotenv";
 dotenv.config();
-const secretKey  = process.env.secretKey;
+// const secretKey  = process.env.secretKey;
 const salt  = process.env.salt;
 
 // --------------------Users 
@@ -13,6 +13,7 @@ export async function getUsers(req, res) {
   const allUsers = await User.find();
   res.status(200).send(allUsers);
 }
+
 export async function addUser(req, res) {
   try {
     const { email, password, uid } = req.body;
@@ -23,23 +24,26 @@ export async function addUser(req, res) {
       });
       return;
     }
+    // User.findOne({ email: email })
+    //   .then((doc) => {
+    //   if (doc) {
+    //       res.status(401).send({message: "Email already exists. Please try logging in instead"})
+    //       return;
+    //   }})
 
-    User.findOne({ email: email })
-  .then(async (doc) => {
-      if (doc) {
-          res.status(401).send({message: "Email already exists. Please try logging in instead"})
-          return;
-      }
-      if(password){ const hashedPassword = hashSync(password, salt)}
-      const newUser = new User({
-        email,
-        hashedPassword: password || null,
-        _id: uid || new ObjectId(),
-      });
-      const addUser = await newUser.save();
-      res.status(201).send(addUser);
-  })
+    let hashedPassword = null
+      
+    if (password) hashedPassword = hashSync(password, salt)
+    
+    const newUser = new User({
+      email,
+      hashedPassword: hashedPassword || null,
+      _id: uid || new ObjectId(),
+    });
 
+    const addUser = await newUser.save();
+
+    res.status(201).send(addUser);
   } catch (error) {
     res.status(500).json({
       error: [error.message],
@@ -47,6 +51,7 @@ export async function addUser(req, res) {
     });
   }
 }
+
 export async function addUserInfo(req,res){
   const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
   const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
