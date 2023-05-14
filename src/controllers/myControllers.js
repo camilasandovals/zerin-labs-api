@@ -44,7 +44,8 @@ export async function addUser(req, res) {
     const addUser = await newUser.save();
 
     res.status(201).send(addUser);
-  } catch (error) {
+  } 
+  catch (error) {
     res.status(500).json({
       error: [error.message],
       message: "an error",
