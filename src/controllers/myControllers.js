@@ -23,24 +23,23 @@ export async function addUser(req, res) {
       });
       return;
     }
-    const check = User.findOne({ email: {email} })
-    
-    if(check){
-      res.status(401).send({message: "Email already exists. Please try logging in instead"})
-      return;
+
+    User.findOne({ email: email })
+  .then(async (doc) => {
+      if (doc) {
+          res.status(401).send({message: "Email already exists. Please try logging in instead"})
+          return;
       }
-    
-    if(password){ const hashedPassword = hashSync(password, salt)}
-    
-    const newUser = new User({
-      email,
-      hashedPassword: password || null,
-      _id: uid || new ObjectId(),
-    });
+      if(password){ const hashedPassword = hashSync(password, salt)}
+      const newUser = new User({
+        email,
+        hashedPassword: password || null,
+        _id: uid || new ObjectId(),
+      });
+      const addUser = await newUser.save();
+      res.status(201).send(addUser);
+  })
 
-    const addUser = await newUser.save();
-
-    res.status(201).send(addUser);
   } catch (error) {
     res.status(500).json({
       error: [error.message],
