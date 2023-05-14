@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Schema } from "mongoose";
 import { model } from "mongoose";
 
@@ -11,7 +12,7 @@ const userSchema = new Schema({
         type: String,
     },
     _id:{
-        type: String
+        type: String || ObjectId
     },
     points: {
         type: String
