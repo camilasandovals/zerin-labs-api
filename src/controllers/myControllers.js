@@ -60,13 +60,14 @@ export async function addUserInfo(req,res){
 }
 // ---------------   Medications
 export async function getMedications(req, res) {
-  // const token = req.header.authorization
-  //   if(!token) {
-  //       res.status(401).send({message: "Unauthorized. A valid token is required."})
-  //       return
-  //   }
-  const allMedication = await Medication.find();
-  res.status(200).send(allMedication);
+  const { uid } = req.query;
+  
+  try {
+    const medications = await Medication.find({ uid });
+    res.status(200).send(medications);
+  } catch (error) {
+    res.status(500).send("Error retrieving medications");
+  }
 }
 export async function getMedInfo(req,res){
   try {

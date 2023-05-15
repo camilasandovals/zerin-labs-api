@@ -2,6 +2,7 @@ const userDummyData = [
     {
         email: "user1",
         hashedPassword: "12345678",
+        uid: "jffgjfhjf"
     }
 ]
 
