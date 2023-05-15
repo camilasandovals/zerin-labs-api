@@ -40,7 +40,7 @@ const MedicationSchema = new Schema({
     user: {
         type: String
     },
-    endDate: {
+    uid: {
         type: String
     }
 })

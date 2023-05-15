@@ -16,7 +16,7 @@ const medicationDummyData = [
         notes: "do not drink alcohol",
         medImg: "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg",
         show: true,
-        user: "mila@mila.com",
+        uid: "mila@mila.com",
         endDate: "2023-05-10"
     },
 ]
