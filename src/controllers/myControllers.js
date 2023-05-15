@@ -86,13 +86,16 @@ export async function addMedication(req,res){
   //       return
   //   }
   try {
-    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, user, endDate } = req.body;
+    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate } = req.body;
     const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate});
     await newMedication.save();
     await getMedications(req, res);
   }
   catch (error) {
-  res.status(500).send({ message: "An error ocurred"});
+    res.status(500).json({
+      error: [error.message],
+      message: "an error",
+    });
   }
 }
 export async function deleteMedication(req, res){
