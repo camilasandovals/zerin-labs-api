@@ -17,6 +17,7 @@ const medicationDummyData = [
         medImg: "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg",
         show: true,
         uid: "mila@mila.com",
-        endDate: "2023-05-10"
+        endDate: "2023-05-10",
+        createdAt: "2020-5-10"
     },
 ]

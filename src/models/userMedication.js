@@ -37,12 +37,25 @@ const MedicationSchema = new Schema({
     createdAt: { 
         type: Date, default: Date.now 
     },
-    user: {
-        type: String
-    },
+    
     uid: {
         type: String
-    }
+    },
+    endDate: {
+        type: Date
+    },
+    doctor: {
+        type: String
+    }, 
+    reactions: {
+        type: String
+    },
+    takingPerDayOrWeek: {
+        type: String
+    },
+    totalTaken: {
+        type: Number
+    },
 })
 
 const Medication = new model("Medication", MedicationSchema);

@@ -24,12 +24,12 @@ export async function addUser(req, res) {
       });
       return;
     }
-    // User.findOne({ email: email })
-    //   .then((doc) => {
-    //   if (doc) {
-    //       res.status(401).send({message: "Email already exists. Please try logging in instead"})
-    //       return;
-    //   }})
+
+    const doc = await User.findOne({ email: email })
+    if (doc) {
+        res.status(401).send({message: "Email already exists. Please try logging in instead"})
+        return;
+    }
 
     let hashedPassword = null
       
@@ -38,7 +38,7 @@ export async function addUser(req, res) {
     const newUser = new User({
       email,
       hashedPassword: hashedPassword || null,
-      _id: uid || new ObjectId(),
+      _id: new ObjectId(uid) || new ObjectId(),
     });
 
     const addUser = await newUser.save();
@@ -86,8 +86,8 @@ export async function addMedication(req,res){
   //       return
   //   }
   try {
-    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate});
+    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken });
     await newMedication.save();
     await getMedications(req, res);
   }
