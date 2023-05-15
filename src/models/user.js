@@ -11,9 +11,6 @@ const userSchema = new Schema({
     hashedPassword: {
         type: String,
     },
-    _id:{
-        type: String || ObjectId
-    },
     points: {
          type: String, default: 0 
     },

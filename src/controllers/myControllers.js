@@ -38,7 +38,6 @@ export async function addUser(req, res) {
     const newUser = new User({
       email,
       hashedPassword: hashedPassword || null,
-      _id: uid
     });
 
     const addUser = await newUser.save();
