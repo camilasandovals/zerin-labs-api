@@ -3,18 +3,9 @@ const userDummyData = [
         email: "user1",
         hashedPassword: "12345678",
         uid,
-    },
-    {
-        email: "user2",
-        hashedPassword: "12345678",
-        uid
-    },
-]
-const userinfoDummyData = [
-    {
-
     }
 ]
+
 const medicationDummyData = [
     {
         nameMed: "ibuprofen",
@@ -24,6 +15,8 @@ const medicationDummyData = [
         frequency: "twice a day",
         notes: "do not drink alcohol",
         medImg: "https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg",
-        show: true
+        show: true,
+        user: "mila@mila.com",
+        endDate: "2023-05-10"
     },
 ]

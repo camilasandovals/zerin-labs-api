@@ -39,6 +39,9 @@ const MedicationSchema = new Schema({
     },
     user: {
         type: String
+    },
+    endDate: {
+        type: String
     }
 })
 
