@@ -86,8 +86,8 @@ export async function addMedication(req,res){
   //       return
   //   }
   try {
-    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show});
+    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, user } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, user});
     await newMedication.save();
     await getMedications(req, res);
   }
