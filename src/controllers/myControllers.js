@@ -7,13 +7,11 @@ import dotenv from "dotenv";
 dotenv.config();
 // const secretKey  = process.env.secretKey;
 const salt  = process.env.salt;
-
 // --------------------Users 
 export async function getUsers(req, res) {
   const allUsers = await User.find();
   res.status(200).send(allUsers);
 }
-
 export async function addUser(req, res) {
   try {
     const { email, password, uid } = req.body;
@@ -53,7 +51,6 @@ export async function addUser(req, res) {
     });
   }
 }
-
 export async function addUserInfo(req,res){
   const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
   const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
