@@ -36,6 +36,8 @@ export async function addUser(req, res) {
     if (password) hashedPassword = hashSync(password, salt)
     
     const newUser = new User({
+      uid,
+      _id: new ObjectId(uid),
       email,
       hashedPassword: hashedPassword || null,
     });
