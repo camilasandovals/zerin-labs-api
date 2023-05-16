@@ -15,6 +15,9 @@ const userSchema = new Schema({
          type: String, default: 0 
     },
     createdAt: { type: Date, default: Date.now },
+    uid: {
+        type: String
+    }
     // firstname: {
     //     type: String,
     // },
