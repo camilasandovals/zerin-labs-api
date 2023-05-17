@@ -51,6 +51,24 @@ export async function addUser(req, res) {
     });
   }
 }
+
+export async function getUser(req, res) {
+  const {email, password} = req.body
+  if(!email || !password) {
+    res.status(400).send({message: 'Email and password both required'})
+    return
+  }
+  const hashedPassword = hashSync(password, salt)
+  let user = await usersCollection.findOne({email: email.toLowerCase(), password: hashedPassword})
+  if(!user) {
+    res.status(401).send({message: "Invalid email or password"})
+    return
+  }
+  delete user.password
+  const token = jwt.sign(user, secretKey)
+  res.send({user, token})
+}
+
 export async function addUserInfo(req,res){
   const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
   const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
