@@ -12,19 +12,9 @@ export async function getUsers(req, res) {
   const allUsers = await User.find();
   res.status(200).send(allUsers);
 }
-
-export async function getUser(req, res) {  //Just one user
-  const { uid } = req.query;
-  try {
-    const user = await User.find({ uid });
-    res.status(200).send(user);
-  } catch (error) {
-    res.status(500).send("Error retrieving user");
-  }
-}
-
 export async function addUser(req, res) {
   try {
+    const { email, password, uid } = req.body;
     if (!email || (password && password.length < 8)) {
       res.status(400).send({
         message:
@@ -44,6 +34,8 @@ export async function addUser(req, res) {
     if (password) hashedPassword = hashSync(password, salt)
     
     const newUser = new User({
+      uid,
+      _id: new ObjectId(uid),
       email,
       hashedPassword: hashedPassword || null,
     });
