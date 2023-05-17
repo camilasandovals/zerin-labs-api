@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 import { model } from "mongoose";
 
 const userSchema = new Schema({
-    uid: {
+    email: {
         type: String,
         required: true,
         // unique: true
@@ -14,10 +14,10 @@ const userSchema = new Schema({
     points: {
          type: String, default: 0 
     },
-    createdAt: { 
-        type: Date, default: Date.now 
-    },
-
+    createdAt: { type: Date, default: Date.now },
+    uid: {
+        type: String
+    }
     // firstname: {
     //     type: String,
     // },
