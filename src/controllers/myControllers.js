@@ -124,19 +124,33 @@ export async function deleteMedication(req, res){
     res.status(500).send({message : "An error ocurred"})
   }
 }
+// export async function updateMedication(req, res){
+//   try {
+//     //updating show
+//   const docId = { "_id": new ObjectId(req.params.docId)
+//     }
+//   const updateMed = {$set:req.body};
+//   const returnOption = { returnNewDocument: true};
+//   await Medication.findOneAndUpdate(docId, updateMed, returnOption);
+//   //updating points
+//   const { email } = req.query;
+//   const user = await User.find({ email });
+//   const addPoints = { $inc: { points: 1 } }
+//   await User.findOneAndUpdate(user, addPoints, { returnOriginal: false });
+//   await getMedications(req, res);
+//   }
+//   catch {
+//     res.status(200).send({message: "updated"})
+//   }
+// }
+
 export async function updateMedication(req, res){
   try {
-    //updating show
   const docId = { "_id": new ObjectId(req.params.docId)
     }
   const updateMed = {$set:req.body};
   const returnOption = { returnNewDocument: true};
   await Medication.findOneAndUpdate(docId, updateMed, returnOption);
-  //updating points
-  const { email } = req.query;
-  const user = await User.find({ email });
-  const addPoints = { $inc: { points: 1 } }
-  await User.findOneAndUpdate(user, addPoints, { returnOriginal: false });
   await getMedications(req, res);
   }
   catch {
