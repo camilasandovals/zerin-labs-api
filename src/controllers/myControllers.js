@@ -15,6 +15,7 @@ export async function getUsers(req, res) {
 export async function addUser(req, res) {
   try {
     const { email, password, uid } = req.body;
+  
     if (!email || (password && password.length < 8)) {
       res.status(400).send({
         message:
@@ -23,7 +24,7 @@ export async function addUser(req, res) {
       return;
     }
 
-    const doc = await User.findOne({ email: email })
+    const doc = await User.findOne({ email: email.toLowerCase() })
     if (doc) {
         res.status(401).send({message: "Email already exists. Please try logging in instead"})
         return;
@@ -59,14 +60,13 @@ export async function getUser(req, res) {
     return
   }
   const hashedPassword = hashSync(password, salt)
-  let user = await usersCollection.findOne({email: email.toLowerCase(), password: hashedPassword})
+  let user = await User.findOne({email: email.toLowerCase(), hashedPassword: hashedPassword})
   if(!user) {
     res.status(401).send({message: "Invalid email or password"})
     return
   }
-  delete user.password
-  const token = jwt.sign(user, secretKey)
-  res.send({user, token})
+  delete user.hashedPassword
+  res.send(user)
 }
 
 export async function addUserInfo(req,res){
