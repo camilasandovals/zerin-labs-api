@@ -3,11 +3,11 @@ import { Schema } from "mongoose";
 import { model } from "mongoose";
 
 const userSchema = new Schema({
-    // email: {
-    //     type: String,
-    //     required: true,
-    //     // unique: true
-    // },
+    uid: {
+        type: String,
+        required: true,
+        // unique: true
+    },
     hashedPassword: {
         type: String,
     },
