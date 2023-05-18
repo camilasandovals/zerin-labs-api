@@ -71,19 +71,19 @@ export async function getUser(req, res) {
   res.send(user)
 }
 
-export async function addUserInfo(req,res){
+export async function addUserInfo(req, res) {
   const { email } = req.query;
   try {
-    const user = await Medication.findOneAndUpdate({ email });
-    const updateUser = {$set:req.body};
-    const returnOption = { returnNewDocument: true};
-    await User.findOneAndUpdate(user, updateUser, returnOption);
+    const filter = { email };
+    const update = { $set: req.body };
+    const options = { returnOriginal: false };
+    const updatedUser = await User.findOneAndUpdate(filter, update, options);
     await getUsers(req, res);
-    }
-    catch {
-      res.status(200).send({message: "updated user"})
-    }
+  } catch (error) {
+    res.status(500).send({ message: "Error updating user" });
+  }
 }
+
 // ---------------   Medications
 export async function getMedications(req, res) {
   const { email } = req.query;
