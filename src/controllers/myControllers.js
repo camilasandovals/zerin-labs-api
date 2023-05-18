@@ -13,6 +13,7 @@ export async function getUsers(req, res) {
   const allUsers = await User.find({email});
   res.status(200).send(allUsers);
 }
+
 export async function addUser(req, res) {
   try {
     const { email, password, uid } = req.body;
@@ -85,10 +86,10 @@ export async function addUserInfo(req,res){
 }
 // ---------------   Medications
 export async function getMedications(req, res) {
-  const { uid } = req.query;
+  const { email } = req.query;
   
   try {
-    const medications = await Medication.find({ uid });
+    const medications = await Medication.find({ email });
     res.status(200).send(medications);
   } catch (error) {
     res.status(500).send("Error retrieving medications");
@@ -111,8 +112,8 @@ export async function addMedication(req,res){
   //       return
   //   }
   try {
-    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken } = req.body;
-    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, uid, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken });
+    const {nameMed, dosage, frequency, unit, quantity, notes, medImg, show, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken } = req.body;
+    const newMedication = new Medication({nameMed, dosage, frequency, unit, quantity, notes, medImg, show, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken });
     await newMedication.save();
     await getMedications(req, res);
   }
@@ -123,20 +124,20 @@ export async function addMedication(req,res){
     });
   }
 }
-export async function deleteMedication(req, res){
-  //updating points
-  const { email } = req.query;
-  try {
-    const user = await User.findOneAndUpdate({ email });
-    const points = { $inc: { points: 20 } }
-    await User.findOneAndUpdate(user, points, { returnOriginal: false });
-    await getUsers(req, res);
+// export async function deleteMedication(req, res){
+//   //updating points
+//   const { email } = req.query;
+//   try {
+//     const user = await User.findOneAndUpdate({ email });
+//     const points = { $inc: { points: 20 } }
+//     await User.findOneAndUpdate(user, points, { returnOriginal: false });
+//     await getUsers(req, res);
 
-  }
-  catch {
-    res.status(200).send({message: "points added"})
-  }
-}
+//   }
+//   catch {
+//     res.status(200).send({message: "points added"})
+//   }
+// }
 export async function updateMedication(req, res){
   try {
   const docId = { "_id": new ObjectId(req.params.docId)
