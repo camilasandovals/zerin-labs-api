@@ -70,10 +70,17 @@ export async function getUser(req, res) {
 }
 
 export async function addUserInfo(req,res){
-  const {firstname, age, gender, cholesterol, height, weight, img} = req.body;
-  const infoUser = new User({firstname, age, gender, cholesterol, height, weight, img});
-  await infoUser.save();
-  res.send({ message: "user information added" });
+  const { email } = req.query;
+  try {
+    const user = await Medication.find({ email });
+    const updateUser = {$set:req.body};
+    const returnOption = { returnNewDocument: true};
+    await User.findOneAndUpdate(user, updateUser, returnOption);
+    await getUsers(req, res);
+    }
+    catch {
+      res.status(200).send({message: "updated"})
+    }
 }
 // ---------------   Medications
 export async function getMedications(req, res) {

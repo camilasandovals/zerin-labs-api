@@ -17,28 +17,25 @@ const userSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
     uid: {
         type: String
-    }
-    // firstname: {
-    //     type: String,
-    // },
-    // age: {
-    //     type: Number,
-    // },
-    // gender: {
-    //     type: Boolean,
-    // },
-    // cholesterol: {
-    //     type: Number,
-    // },
-    // height: {
-    //     type: Number,
-    // },
-    // weight: {
-    //     type: Number,
-    // },
-    // img: {
-    //     type: String,
-    // },
+    },
+    fullname: {
+        type: String,
+    },
+    age: {
+        type: String,
+    },
+    gender: {
+        type: String,
+    },
+    height: {
+        type: String,
+    },
+    weight: {
+        type: String,
+    },
+    img: {
+        type: String,
+    },
 })
 
 const User = new model("User", userSchema);

@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 router.get("/users", getUsers);
 router.post("/users/login", getUser);
 router.post("/users", addUser);
-router.post("/usersinfo", addUserInfo);
+router.patch("/users", addUserInfo);
 router.get("/medications", getMedications);
 router.get("/medications/:docId", getMedInfo);
 router.post("/medications", addMedication);
