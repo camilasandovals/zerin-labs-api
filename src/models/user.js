@@ -12,7 +12,7 @@ const userSchema = new Schema({
         type: String,
     },
     points: {
-         type: String, default: 0 
+         type: Number, default: 0 
     },
     createdAt: { type: Date, default: Date.now },
     uid: {

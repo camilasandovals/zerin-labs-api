@@ -80,7 +80,7 @@ export async function addUserInfo(req,res){
     await getUsers(req, res);
     }
     catch {
-      res.status(200).send({message: "updated"})
+      res.status(200).send({message: "updated user"})
     }
 }
 // ---------------   Medications
@@ -127,13 +127,14 @@ export async function deleteMedication(req, res){
   //updating points
   const { email } = req.query;
   try {
-    const user = await User.find({ email });
-    const addPoints = { $inc: { points: 20 } }
-    await User.findOneAndUpdate(user, addPoints, { returnOriginal: false });
+    const user = await User.findOneAndUpdate({ email });
+    const points = { $inc: { points: 20 } }
+    await User.findOneAndUpdate(user, points, { returnOriginal: false });
     await getUsers(req, res);
+
   }
   catch {
-    res.status(200).send({message: "updated"})
+    res.status(200).send({message: "points added"})
   }
 }
 export async function updateMedication(req, res){
@@ -146,6 +147,6 @@ export async function updateMedication(req, res){
   await getMedications(req, res);
   }
   catch {
-    res.status(200).send({message: "updated"})
+    res.status(200).send({message: "updated medication"})
   }
 }
