@@ -124,20 +124,20 @@ export async function addMedication(req,res){
     });
   }
 }
-// export async function deleteMedication(req, res){
-//   //updating points
-//   const { email } = req.query;
-//   try {
-//     const user = await User.findOneAndUpdate({ email });
-//     const points = { $inc: { points: 20 } }
-//     await User.findOneAndUpdate(user, points, { returnOriginal: false });
-//     await getUsers(req, res);
+export async function deleteMedication(req, res){
+  //updating points
+  const { email } = req.query;
+  try {
+    const user = await User.findOneAndUpdate({ email });
+    const points = { $inc: { points: 20 } }
+    await User.findOneAndUpdate(user, points, { returnOriginal: false });
+    await getUsers(req, res);
 
-//   }
-//   catch {
-//     res.status(200).send({message: "points added"})
-//   }
-// }
+  }
+  catch {
+    res.status(200).send({message: "points added"})
+  }
+}
 export async function updateMedication(req, res){
   try {
   const docId = { "_id": new ObjectId(req.params.docId)
