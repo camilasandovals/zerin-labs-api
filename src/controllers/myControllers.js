@@ -124,34 +124,18 @@ export async function addMedication(req,res){
   }
 }
 export async function deleteMedication(req, res){
-  try{
-    const docId = { "_id": new ObjectId(req.params.docId)}
-    await Medication.deleteOne(docId);
-    await getMedications(req, res);
-  } catch(error) {
-    res.status(500).send({message : "An error ocurred"})
+  //updating points
+  const { email } = req.query;
+  try {
+    const user = await User.find({ email });
+    const addPoints = { $inc: { points: 20 } }
+    await User.findOneAndUpdate(user, addPoints, { returnOriginal: false });
+    await getUsers(req, res);
+  }
+  catch {
+    res.status(200).send({message: "updated"})
   }
 }
-// export async function updateMedication(req, res){
-//   try {
-//     //updating show
-//   const docId = { "_id": new ObjectId(req.params.docId)
-//     }
-//   const updateMed = {$set:req.body};
-//   const returnOption = { returnNewDocument: true};
-//   await Medication.findOneAndUpdate(docId, updateMed, returnOption);
-//   //updating points
-//   const { email } = req.query;
-//   const user = await User.find({ email });
-//   const addPoints = { $inc: { points: 1 } }
-//   await User.findOneAndUpdate(user, addPoints, { returnOriginal: false });
-//   await getMedications(req, res);
-//   }
-//   catch {
-//     res.status(200).send({message: "updated"})
-//   }
-// }
-
 export async function updateMedication(req, res){
   try {
   const docId = { "_id": new ObjectId(req.params.docId)
