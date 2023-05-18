@@ -9,7 +9,8 @@ dotenv.config();
 const salt  = process.env.salt;
 // --------------------Users 
 export async function getUsers(req, res) {
-  const allUsers = await User.find();
+  const { email } = req.query;
+  const allUsers = await User.find({email});
   res.status(200).send(allUsers);
 }
 export async function addUser(req, res) {
