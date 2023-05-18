@@ -9,6 +9,9 @@ const MedicationSchema = new Schema({
         type: String,
         
     },
+    email: {
+        type: String,
+    },
     dosage: {
         type: Number,
         required: true,
