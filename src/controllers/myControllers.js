@@ -74,7 +74,7 @@ export async function getUser(req, res) {
 export async function addUserInfo(req,res){
   const { email } = req.query;
   try {
-    const user = await Medication.find({ email });
+    const user = await Medication.findOneAndUpdate({ email });
     const updateUser = {$set:req.body};
     const returnOption = { returnNewDocument: true};
     await User.findOneAndUpdate(user, updateUser, returnOption);
