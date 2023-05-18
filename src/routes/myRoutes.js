@@ -14,6 +14,6 @@ router.get("/medications", getMedications);
 router.get("/medications/:docId", getMedInfo);
 router.post("/medications", addMedication);
 router.patch("/medications/:docId", updateMedication);
-router.delete("/medications/:docId", deleteMedication)
+router.post("/users/points", deleteMedication)
 
 export default router;
