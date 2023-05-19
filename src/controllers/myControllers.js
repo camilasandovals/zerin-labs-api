@@ -10,8 +10,8 @@ const salt  = process.env.salt;
 // --------------------Users 
 export async function getUsers(req, res) {
   const { email } = req.query;
-  const allUsers = await User.find({email});
-  res.status(200).send(allUsers);
+  const allUsers = await User.findOne({email});
+  res.status(200).send(allUsersz  );
 }
 
 export async function addUser(req, res) {
@@ -39,7 +39,7 @@ export async function addUser(req, res) {
     const newUser = new User({
       uid,
       _id: new ObjectId(uid),
-      email,
+      email: email.toLowerCase(),
       hashedPassword: hashedPassword || null,
     });
 
@@ -106,11 +106,7 @@ export async function getMedInfo(req,res){
   }
 }
 export async function addMedication(req,res){
-  // const token = req.header.authorization
-  //   if(!token) {
-  //       res.status(401).send({message: "Unauthorized. A valid token is required."})
-  //       return
-  //   }
+  
   try {
     const {nameMed, email, dosage, frequency, unit, quantity, notes, medImg, show, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken } = req.body;
     const newMedication = new Medication({nameMed, email, dosage, frequency, unit, quantity, notes, medImg, show, endDate, doctor, reactions, takingPerDayOrWeek, totalTaken });
@@ -128,11 +124,10 @@ export async function deleteMedication(req, res){
   //updating points
   const { email } = req.query;
   try {
-    const user = await User.findOneAndUpdate({ email });
     const points = { $inc: { points: 20 } }
-    await User.findOneAndUpdate(user, points, { returnOriginal: false });
+    const user = await User.findOneAndUpdate({ email:email }, points, { returnOriginal: false });
+    //await User.findOneAndUpdate(user, points, { returnOriginal: false });
     await getUsers(req, res);
-
   }
   catch {
     res.status(200).send({message: "points added"})
@@ -142,9 +137,10 @@ export async function updateMedication(req, res){
   try {
   const docId = { "_id": new ObjectId(req.params.docId)
     }
-  const updateMed = {$set:req.body};
+  //const updateMed = {$set:req.body};
+  const points = { $inc: { points: 20 } }
   const returnOption = { returnNewDocument: true};
-  await Medication.findOneAndUpdate(docId, updateMed, returnOption);
+  await Medication.findOneAndUpdate(docId, points, returnOption);
   await getMedications(req, res);
   }
   catch {
