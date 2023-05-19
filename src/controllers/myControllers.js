@@ -11,7 +11,7 @@ const salt  = process.env.salt;
 export async function getUsers(req, res) {
   const { email } = req.query;
   const allUsers = await User.findOne({email});
-  res.status(200).send(allUsersz  );
+  res.status(200).send(allUsers);
 }
 
 export async function addUser(req, res) {
@@ -135,13 +135,23 @@ export async function deleteMedication(req, res){
 }
 export async function updateMedication(req, res){
   try {
-  const docId = { "_id": new ObjectId(req.params.docId)
-    }
-  //const updateMed = {$set:req.body};
-  const points = { $inc: { points: 20 } }
   const returnOption = { returnNewDocument: true};
-  await Medication.findOneAndUpdate(docId, points, returnOption);
+
+  //No mostrar el medicamento despues de dar click
+  const MedicationDocId = { "_id": new ObjectId(req.params.docId)}
+  const medicationUpdate = {show: false}
+  await Medication.findOneAndUpdate(MedicationDocId, medicationUpdate, returnOption);
+
+
+  //Sumatoria de 20 puntos al usuario
+  const { email } = req.query;
+  const userEmail = {email:email}
+  const points = { $inc: { points: 20 } }
+  await User.findOneAndUpdate(userEmail, points, returnOption);
+
+
   await getMedications(req, res);
+
   }
   catch {
     res.status(200).send({message: "updated medication"})
