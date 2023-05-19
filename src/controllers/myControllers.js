@@ -10,8 +10,8 @@ const salt  = process.env.salt;
 // --------------------Users 
 export async function getUsers(req, res) {
   const { email } = req.query;
-  const allUsers = await User.findOne({email});
-  res.status(200).send(allUsers);
+  const thisUser = await User.findOne({email});
+  res.status(200).send(thisUser);
 }
 
 export async function addUser(req, res) {
@@ -149,8 +149,12 @@ export async function updateMedication(req, res){
   const points = { $inc: { points: 20 } }
   await User.findOneAndUpdate(userEmail, points, returnOption);
 
+  const medications = await Medication.find({ email });
+  const thisUser = await User.findOne({email});
 
-  await getMedications(req, res);
+  const reply = {medications:medications, user:thisUser}
+  res.status(200).json(reply)
+
 
   }
   catch {
