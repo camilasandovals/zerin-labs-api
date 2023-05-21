@@ -34,7 +34,7 @@ const userSchema = new Schema({
         type: String,
     },
     img: {
-        type: String,
+        type: String, default: "https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
     },
 })
 
