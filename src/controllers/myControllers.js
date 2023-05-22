@@ -136,10 +136,11 @@ export async function deleteMedication(req, res){
 export async function updateMedication(req, res){
   try {
   const returnOption = { returnNewDocument: true};
-
+    const {variable, value} = req.body
+    // console.log(variable, value,req.body)
   //No mostrar el medicamento despues de dar click
   const MedicationDocId = { "_id": new ObjectId(req.params.docId)}
-  const medicationUpdate = {show: false}
+  const medicationUpdate = {[variable]: value}
   await Medication.findOneAndUpdate(MedicationDocId, medicationUpdate, returnOption);
 
 
