@@ -3,8 +3,7 @@ import { ObjectId } from "mongodb";
 import User from "../models/user.js";
 import Medication from "../models/userMedication.js";
 // import jwt from "jsonwebtoken"
-import dotenv from "dotenv";
-dotenv.config();
+
 // const secretKey  = process.env.secretKey;
 const salt  = process.env.salt;
 // --------------------Users 
