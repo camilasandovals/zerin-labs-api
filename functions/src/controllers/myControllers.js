@@ -1,11 +1,9 @@
 import { hashSync } from "bcrypt"
 import { ObjectId } from "mongodb";
 import User from "../models/user.js";
-import Medication from "../models/userMedication.js";
-// import jwt from "jsonwebtoken"
-
-// const secretKey  = process.env.secretKey;
-const salt  = process.env.salt;
+import Medication from "../models/UserMedication.js";
+// import jwt from "jsonwebtoken";
+import { salt } from "../../env.js";
 // --------------------Users 
 export async function getUsers(req, res) {
   const { email } = req.query;

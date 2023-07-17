@@ -3,7 +3,7 @@ import { getUsers, getUser, getMedications, getMedInfo, addMedication, addUser, 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("Welcome to my API");
+  res.send("Welcome to my API.");
 });
 
 router.get("/users", getUsers);
